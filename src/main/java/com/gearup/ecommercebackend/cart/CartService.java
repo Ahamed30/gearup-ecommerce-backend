@@ -2,8 +2,10 @@ package com.gearup.ecommercebackend.cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -15,8 +17,31 @@ public class CartService {
         this.cartItemRepository = cartItemRepository;
     }
 
+    @Transactional
     public void addToCart(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
+        try {
+            Optional<CartItem> cartItemBySku = cartItemRepository.findCartItemBySku(cartItem.getSku());
+            if (cartItemBySku.isPresent()) {
+                cartItemBySku.get().setQuantity(cartItemBySku.get().getQuantity() + cartItem.getQuantity());
+            } else {
+                cartItemRepository.save(cartItem);
+            }
+        } catch (Error error) {
+            throw new IllegalStateException("Issue occurred while adding item to cart");
+        }
+    }
+
+    public void removeItemFromCart(Long cartId) {
+        cartItemRepository.deleteById(cartId);
+    }
+
+    public Optional<CartItem> getCartItemById(Long itemId) {
+        System.out.println(">>"+ itemId);
+        return cartItemRepository.findById(itemId);
+    }
+
+    public Optional<CartItem> getCartItemBySku(String sku) {
+        return cartItemRepository.findCartItemBySku(sku);
     }
 
     public ArrayList<CartItem> fetchCart(String userId) {

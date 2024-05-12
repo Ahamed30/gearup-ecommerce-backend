@@ -16,10 +16,10 @@ public class CheckoutController {
     }
 
     @PostMapping(path = "/setCheckout")
-    private String setCheckout(@RequestBody Checkout checkout) {
+    private Checkout setCheckout(@RequestBody Checkout checkout) {
         try{
             checkoutService.setCheckout(checkout);
-            return "Checkout Details Saved Successfully";
+            return checkout;
         }catch(Error error) {
             throw new IllegalStateException("Unable to save checkout details", error);
         }
