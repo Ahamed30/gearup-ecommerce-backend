@@ -47,4 +47,15 @@ public class CartService {
     public ArrayList<CartItem> fetchCart(String userId) {
         return cartItemRepository.findAllCartItemByUserId(userId);
     }
+
+    @Transactional
+    public void removeAllItems(String userId) {
+       try{
+           cartItemRepository.deleteAllCartItemByUserId(userId);
+       }catch (Error err) {
+           throw new IllegalStateException("Error while clearing cart", err);
+       }
+    }
+
+
 }

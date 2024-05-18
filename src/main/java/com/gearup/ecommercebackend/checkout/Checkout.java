@@ -10,15 +10,8 @@ import lombok.Setter;
 @Table
 public class Checkout {
     @Id
-    @SequenceGenerator(
-            name="id",
-            sequenceName = "id",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.UUID,
-            generator = "id"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "checkout_item_seq")
+    @SequenceGenerator(name = "checkout_item_seq", sequenceName = "checkout_item_seq", allocationSize = 1)
     private Long id;
     @Column(unique = true)
     private String userId;

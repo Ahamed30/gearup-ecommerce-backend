@@ -12,15 +12,8 @@ import java.math.BigDecimal;
 @Table
 public class CartItem {
     @Id
-    @SequenceGenerator(
-            name="id",
-            sequenceName = "id",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.UUID,
-            generator = "id"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_item_seq")
+    @SequenceGenerator(name = "cart_item_seq", sequenceName = "cart_item_seq", allocationSize = 1)
     private Long id;
     private String sku;
     private String userId;

@@ -10,15 +10,8 @@ import lombok.Setter;
 @Table
 public class Inventory {
     @Id
-    @SequenceGenerator(
-            name="id",
-            sequenceName = "id",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.UUID,
-            generator = "id"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory_item_seq")
+    @SequenceGenerator(name = "inventory_item_seq", sequenceName = "inventory_item_seq", allocationSize = 1)
     private Long id;
     private String productId;
     @Column(unique = true)

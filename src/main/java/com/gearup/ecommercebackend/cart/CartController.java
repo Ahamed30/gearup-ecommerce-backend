@@ -17,7 +17,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    private Cart modifyToCartFormat(ArrayList<CartItem> cartItems, String userId) {
+    public Cart modifyToCartFormat(ArrayList<CartItem> cartItems, String userId) {
         Cart cart = new Cart(userId);
         cart.setItems(cartItems);
         cart.setItemsCount(cartItems.size());
