@@ -37,4 +37,10 @@ public class Inventory {
         this.size = size;
     }
 
+    public Inventory(String productId, Integer inventoryCount, String size) {
+        this.productId = productId;
+        this.inventoryCount = inventoryCount;
+        this.size = size;
+    }
+
 }

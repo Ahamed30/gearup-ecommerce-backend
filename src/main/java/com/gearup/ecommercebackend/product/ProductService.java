@@ -23,7 +23,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void addInventory(Inventory inventory) {
+    public void updateInventory(Inventory inventory) {
         try {
             Optional<Inventory> inventoryWithCount = productRepository.findInventoryBySku(inventory.getSku());
             if (inventoryWithCount.isPresent()) {

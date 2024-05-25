@@ -38,7 +38,7 @@ public class ProductController {
         for(Inventory currInventory: inventory) {
             String sku = InventoryUtils.getSku(currInventory.getProductId(), currInventory.getSize());
             currInventory.setSku(sku);
-            productService.addInventory(currInventory);
+            productService.updateInventory(currInventory);
         }
         return "Successfully added inventory added for these products";
     }

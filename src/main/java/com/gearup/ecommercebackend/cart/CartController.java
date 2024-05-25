@@ -36,8 +36,6 @@ public class CartController {
     @PostMapping(path= "/addToCart")
     public Cart addToCart(@RequestBody CartItem cartItem) {
         try{
-            //Need to check inventory before adding
-            //check quantity increase should not add new product
             cartItem.setSku(InventoryUtils.getSku(cartItem.getProductId(), cartItem.getSize()));
             cartService.addToCart(cartItem);
             ArrayList<CartItem> cartItems = cartService.fetchCart(cartItem.getUserId());
